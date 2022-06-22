@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  gap: 5px;
+  margin: 5px;
+  max-width: 1000px;
+}
+
+.grid-cell {
+  background-color: lightgrey ;
+}

@@ -2,7 +2,7 @@ const ship = (length) => {
   const arr = [];
   arr.length = length;
 
-  function hit = (num) => arr[num - 1] = 'X';
+  const hit = (num) => arr[num - 1] = 'X';
 
   const sunk = (value) => value === 'X';
 

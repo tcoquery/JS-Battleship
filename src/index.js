@@ -1,5 +1,5 @@
 import { ship } from './modules/ship';
+import { gameboard } from './modules/gameboards';
 
-const cruiser = ship(1);
-cruiser.hit(1);
-cruiser.isSunk();
+const board = gameboard();
+board.createGrid();

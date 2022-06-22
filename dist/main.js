@@ -1,1 +1,1 @@
-(()=>{"use strict";const n=(n=>{const t=[];t.length=1;const s=n=>"X"===n;return{arr:t,isSunk:()=>{t.every(s)&&console.log("sunk")},hit:function(n){t[n-1]="X"}}})();n.hit(1),n.isSunk()})();
+(()=>{"use strict";(()=>{const e=document.querySelector(".grid");return{createGrid:function(){for(let t=0;t<100;t+=1){const r=document.createElement("div");r.classList.add("grid-cell"),r.id=t,e.appendChild(r)}}}})().createGrid()})();
