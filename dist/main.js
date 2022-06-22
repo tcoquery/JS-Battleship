@@ -1,0 +1,1 @@
+(()=>{"use strict";const n=(n=>{const t=[];t.length=1;const s=n=>"X"===n;return{arr:t,isSunk:()=>{t.every(s)&&console.log("sunk")},hit:function(n){t[n-1]="X"}}})();n.hit(1),n.isSunk()})();
