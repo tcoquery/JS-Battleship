@@ -14,7 +14,7 @@ const gameboard = () => {
     ['', '', '', '', '', '', '', '', '', '']
   ];
 
-  const shipPresent = (element) => element == 'S';
+  const shipPresent = (element) => element != '';
   function placeShip(x, y, length, obj) {
     if (orientation == 'hori') {
       let horiShipArray = [];

@@ -24,7 +24,7 @@
   justify-content: center;
 }
 
-.grid-cell {
+.player-grid-cell, .computer-grid-cell {
   background-color: lightgrey ;
 }
 

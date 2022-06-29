@@ -1,5 +1,5 @@
 const startBtn = document.getElementById('start');
-let orientation = '';
+let orientation = 'hori';
 
 startBtn.addEventListener('click', () => {
   const gameInfo = document.querySelector('.game-info');
@@ -23,7 +23,7 @@ function showShip(array) {
     for (let j = 0; j < 10; j++) {
       if(array[i][j] != '') {
         const cell = document.getElementById(`${i}` + `${j}`);
-        cell.classList.remove('.grid-cell');
+        cell.classList.remove('.player-grid-cell');
         cell.classList.add('grid-cell-with-ship');
       }
     }
@@ -35,7 +35,7 @@ function createPlayerGrid() {
     for (let j = 0; j < 10; j++) {
       const grid = document.getElementById('player-grid');
       const gridCell = document.createElement('div');
-      gridCell.classList.add('grid-cell');
+      gridCell.classList.add('player-grid-cell');
       gridCell.dataset.y = i;
       gridCell.dataset.x = j;
       gridCell.id = `${i}` + `${j}`;
@@ -49,7 +49,7 @@ function createComputerGrid() {
     for (let j = 0; j < 10; j++) {
       const grid = document.getElementById('computer-grid');
       const gridCell = document.createElement('div');
-      gridCell.classList.add('grid-cell');
+      gridCell.classList.add('computer-grid-cell');
       gridCell.dataset.y = i;
       gridCell.dataset.x = j;
       grid.appendChild(gridCell);
