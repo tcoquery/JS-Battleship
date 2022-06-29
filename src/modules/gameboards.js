@@ -1,36 +1,36 @@
 const gameboard = () => {
   const grid = [
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
-    '', '', '', '', '', '', '', '', '', '',
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '']
   ];
 
-  function placeShip(position, length, orientation) {
-    if (orientation == 'hori') {
-      grid[position] = 'S';
+  function placeShip(x, y, length, orientation) {
+    if (orientation == 'hori' && grid[y][x] != 'S') {
+      grid[y][x] = 'S';
       for (let i = 1; i < length; i++) {
-        grid[position + i] = 'S';
+        grid[y][x+i] = 'S';
       }
-    } else if (orientation == 'vert') {
-      grid[position] = 'S';
-      for (let i = 10; i < (length * 10); i += 10) {
-        grid[position + i] = 'S';
+    } else if (orientation == 'vert' && grid[y][x] != 'S') {
+      grid[y][x] = 'S';
+      for (let i = 1; i < length; i++) {
+        grid[y+i][x] = 'S';
       }
     }
   }
 
-  function receiveAttack(position, ship) {
-    if (grid[position]) {
+  function receiveAttack(x, y, ship) {
+    if (grid[y][x]) {
       ship.hit();
     } else {
-      grid[position] = 'O';
+      grid[y][x] = 'O';
     }
   }
 

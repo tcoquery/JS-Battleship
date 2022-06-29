@@ -10,7 +10,7 @@ const gridCells = document.querySelectorAll('.grid-cell');
 
 gridCells.forEach((cell) => {
   cell.addEventListener('click', () => {
-    board.placeShip(parseInt(cell.id), 5, orientation);
+    board.placeShip(parseInt(cell.dataset.x), parseInt(cell.dataset.y), 5, orientation);
     showShip(board.grid);
   });
 });

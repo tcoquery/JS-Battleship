@@ -12,41 +12,48 @@ startBtn.addEventListener('click', () => {
   gameInfo.appendChild(horiBtn);
   vertBtn.addEventListener('click', () => {
     orientation = 'vert';
-    console.log(orientation);
   });
   horiBtn.addEventListener('click', () => {
     orientation = 'hori';
-    console.log(orientation);
   });
 })
 
 function showShip(array) {
-  for(let i = 0; i < array.length; i++) {
-    if(array[i] == 'S') {
-      const cell = document.getElementById(i);
-      cell.classList.remove('.grid-cell');
-      cell.classList.add('grid-cell-with-ship');
+  for(let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      if(array[i][j] == 'S') {
+        const cell = document.getElementById(`${i}` + `${j}`);
+        cell.classList.remove('.grid-cell');
+        cell.classList.add('grid-cell-with-ship');
+      }
     }
   }
 }
 
 function createPlayerGrid() {
-  for (let i = 0; i < 100; i++) {
-    const grid = document.getElementById('player-grid');
-    const gridCell = document.createElement('div');
-    gridCell.classList.add('grid-cell');
-    gridCell.id = i;
-    grid.appendChild(gridCell);
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const grid = document.getElementById('player-grid');
+      const gridCell = document.createElement('div');
+      gridCell.classList.add('grid-cell');
+      gridCell.dataset.y = i;
+      gridCell.dataset.x = j;
+      gridCell.id = `${i}` + `${j}`;
+      grid.appendChild(gridCell);
+    }
   }
 }
 
 function createComputerGrid() {
-  for (let i = 0; i < 100; i++) {
-    const grid = document.getElementById('computer-grid');
-    const gridCell = document.createElement('div');
-    gridCell.classList.add('grid-cell');
-    gridCell.id = i;
-    grid.appendChild(gridCell);
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const grid = document.getElementById('computer-grid');
+      const gridCell = document.createElement('div');
+      gridCell.classList.add('grid-cell');
+      gridCell.dataset.y = i;
+      gridCell.dataset.x = j;
+      grid.appendChild(gridCell);
+    }
   }
 }
 
