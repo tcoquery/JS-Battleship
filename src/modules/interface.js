@@ -21,7 +21,7 @@ startBtn.addEventListener('click', () => {
 function showShip(array) {
   for(let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
-      if(array[i][j] == 'S') {
+      if(array[i][j] != '') {
         const cell = document.getElementById(`${i}` + `${j}`);
         cell.classList.remove('.grid-cell');
         cell.classList.add('grid-cell-with-ship');

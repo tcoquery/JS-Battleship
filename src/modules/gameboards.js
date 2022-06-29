@@ -1,3 +1,5 @@
+import { orientation } from './interface';
+
 const gameboard = () => {
   const grid = [
     ['', '', '', '', '', '', '', '', '', ''],
@@ -13,7 +15,7 @@ const gameboard = () => {
   ];
 
   const shipPresent = (element) => element == 'S';
-  function placeShip(x, y, length, orientation) {
+  function placeShip(x, y, length, obj) {
     if (orientation == 'hori') {
       let horiShipArray = [];
       for (let i = 0; i < length; i++) {
@@ -23,7 +25,7 @@ const gameboard = () => {
         return
       } else if (grid[y][x + (length - 1)] != null) {
         for (let i = 0; i < length; i++) {
-          grid[y][x + i] = 'S';
+          grid[y][x + i] = obj;
         }
       }
     } else if (orientation == 'vert') {
@@ -35,7 +37,7 @@ const gameboard = () => {
         return
       } else if (grid[y + (length - 1)][x] != null) {
         for (let i = 0; i < length; i++) {
-          grid[y + i][x] = 'S';
+          grid[y + i][x] = obj;
         }
       }
     }
