@@ -15,6 +15,7 @@ const gameboard = () => {
   ];
 
   const shipPresent = (element) => element != '';
+
   function placeShip(x, y, length, obj) {
     if (orientation == 'hori') {
       let horiShipArray = [];
@@ -27,7 +28,7 @@ const gameboard = () => {
         for (let i = 0; i < length; i++) {
           grid[y][x + i] = obj;
         }
-      }
+      } 
     } else if (orientation == 'vert') {
       let vertShipArray = [];
       for (let i = 0; i < length; i++) {
