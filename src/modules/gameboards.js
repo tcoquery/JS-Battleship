@@ -13,15 +13,23 @@ const gameboard = () => {
   ];
 
   function placeShip(x, y, length, orientation) {
-    if (orientation == 'hori' && grid[y][x] != 'S') {
+    if (
+      orientation == 'hori' &&
+      grid[y][x] != 'S' &&
+      grid[y][x + (length - 1)] != null
+    ) {
       grid[y][x] = 'S';
       for (let i = 1; i < length; i++) {
-        grid[y][x+i] = 'S';
+        grid[y][x + i] = 'S';
       }
-    } else if (orientation == 'vert' && grid[y][x] != 'S') {
+    } else if (
+      orientation == 'vert' &&
+      grid[y][x] != 'S' &&
+      grid[y + (length - 1)][x] != null
+    ) {
       grid[y][x] = 'S';
       for (let i = 1; i < length; i++) {
-        grid[y+i][x] = 'S';
+        grid[y + i][x] = 'S';
       }
     }
   }
