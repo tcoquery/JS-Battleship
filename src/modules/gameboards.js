@@ -38,7 +38,7 @@ const gameboard = () => {
 
   function shipsSunk() {
     if (grid.some(shipPresent)) {
-      return
+      return;
     } else {
       console.log('game over');
     }

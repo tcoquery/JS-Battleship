@@ -9,10 +9,20 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="grid"></div>
-  <span>
-    <button class="vert">Vertical</button>
-    <button class="hori">Horizontal</button>
-  </span>
+  <div class="game-interface">
+    <button id="start">Start Game</button>
+  </div>
+  <div class="grids">
+    <div class="player-interface">
+      <p class="title">Player</p>
+      <span class="grid" name="player-grid" id="player-grid"></span>
+    </div>
+    <div class="computer-interface">
+      <p class="title" id="computer">Computer</p>
+      <span class="grid" id="computer-grid"></span>
+    </div>
+  </div>
+  <div class="game-info">
+  </div>
 </body>
 </html>

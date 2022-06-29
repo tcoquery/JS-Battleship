@@ -1,12 +1,42 @@
+.grids {
+  display: flex;
+  justify-content: center;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(10, 50px);
   grid-template-rows: repeat(10, 50px);
   gap: 5px;
-  margin: 5px;
   max-width: 1000px;
+}
+
+#player-grid {
+  margin-right: 50px;
+}
+
+#computer-grid {
+  margin-left: 50px;
+}
+
+.game-interface {
+  display: flex;
+  justify-content: center;
 }
 
 .grid-cell {
   background-color: lightgrey ;
 }
+
+.grid-cell-with-ship {
+  background-color: darkgrey;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+ #computer {
+  margin-left: 50px;
+ }
