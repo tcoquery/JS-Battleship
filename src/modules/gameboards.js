@@ -44,6 +44,35 @@ const gameboard = () => {
     }
   }
 
+  function placeComputerShip(x, y, length, obj) {
+    const randomOrientation = Math.floor(Math.random() * 10);
+    if (randomOrientation > 4) {
+      let horiShipArray = [];
+      for (let i = 0; i < length; i++) {
+        horiShipArray.push(grid[y][x + i]);
+      }
+      if (horiShipArray.some(shipPresent)) {
+        placeComputerShip(x, y, length, obj)
+      } else if (grid[y][x + (length - 1)] != null) {
+        for (let i = 0; i < length; i++) {
+          grid[y][x + i] = obj;
+        }
+      } 
+    } else if (randomOrientation <= 4) {
+      let vertShipArray = [];
+      for (let i = 0; i < length; i++) {
+        vertShipArray.push(grid[y + i][x]);
+      }
+      if (vertShipArray.some(shipPresent)) {
+        placeComputerShip(x, y, length, obj)
+      } else if (grid[y + (length - 1)][x] != null) {
+        for (let i = 0; i < length; i++) {
+          grid[y + i][x] = obj;
+        }
+      }
+    }
+  }
+
   function receiveAttack(x, y, ship) {
     if (grid[y][x]) {
       ship.hit();
@@ -61,7 +90,7 @@ const gameboard = () => {
   }
 
   return {
-    grid, placeShip, receiveAttack, shipsSunk,
+    grid, placeShip, placeComputerShip, receiveAttack, shipsSunk,
   };
 };
 
