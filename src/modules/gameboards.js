@@ -79,10 +79,8 @@ const gameboard = () => {
     if (grid[y][x] != '') {
       grid[y][x].hit();
       grid[y][x].isSunk();
-      console.log(grid);
     } else {
       grid[y][x] = 'O';
-      console.log(grid);
     }
   }
 

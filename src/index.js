@@ -63,7 +63,7 @@ gridCells.forEach((cell) => {
         if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerDestroyer) {
           shipsPlaced += 1;
           gameInfo.textContent = '';
-          registerPlayerAttacks(computerBoard);
+          registerPlayerAttacks(computerBoard, board);
         }
         break;
       case 5:
@@ -77,4 +77,3 @@ computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 3, computerCruiser);
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 3, computerSubmarine);
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 2, computerDestroyer);
-console.log(computerBoard.grid);

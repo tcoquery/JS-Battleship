@@ -71,18 +71,37 @@ function shipPlacementOrder(string) {
   textInfo.textContent = `Player, place your ${string}`;
 }
 
-function registerPlayerAttacks(obj) {
+function registerComputerAttacks(obj) {
+  let x = Math.floor(Math.random() * 10)
+  let y = Math.floor(Math.random() * 10)
+  const cell = document.getElementById(`${y}` + `${x}`);
+  if (obj.grid[y][x] != '' && obj.grid[y][x] != 'O') {
+    obj.receiveAttack(x, y);
+    cell.textContent = 'X'
+  } else if (obj.grid[y][x] === '') {
+    cell.textContent = 'O';
+    obj.grid[y][x] = 'O'
+  } else if(cell.textContent === 'O') {
+    registerComputerAttacks(obj);
+  }
+}
+
+function registerPlayerAttacks(computerObj, playerObj) {
   const computerCells = document.querySelectorAll('.computer-grid-cell')
   computerCells.forEach((cell) => {
     cell.addEventListener('click', () => {
-      if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] != '' && obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] != 'O') {
-        obj.receiveAttack(cell.dataset.x, cell.dataset.y);
+      let x = parseInt(cell.dataset.x);
+      let y = parseInt(cell.dataset.y);
+      if(computerObj.grid[y][x] != '' && computerObj.grid[y][x] != 'O') {
+        computerObj.receiveAttack(x, y);
         cell.textContent = 'X';
-      } else if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] === '') {
+        registerComputerAttacks(playerObj);
+      } else if(computerObj.grid[y][x] === '') {
         cell.textContent = 'O';
-        obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] = 'O'
-      } else if(cell.textContent === 'O' || cell.textContent === 'X') {
-        alert("This cell was already selected !")
+        computerObj.grid[y][x] = 'O'
+        registerComputerAttacks(playerObj);
+      } else if(cell.textContent === 'O') {
+        alert("This cell was already selected !");
       }
     })
   })
