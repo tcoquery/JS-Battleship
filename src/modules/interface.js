@@ -75,13 +75,13 @@ function registerPlayerAttacks(obj) {
   const computerCells = document.querySelectorAll('.computer-grid-cell')
   computerCells.forEach((cell) => {
     cell.addEventListener('click', () => {
-      if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] === Object) {
+      if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] != '' && obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] != 'O') {
         obj.receiveAttack(cell.dataset.x, cell.dataset.y);
         cell.textContent = 'X';
       } else if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] === '') {
         cell.textContent = 'O';
         obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] = 'O'
-      } else if(obj.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] === 'O') {
+      } else if(cell.textContent === 'O' || cell.textContent === 'X') {
         alert("This cell was already selected !")
       }
     })
