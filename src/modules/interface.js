@@ -1,9 +1,14 @@
 const startBtn = document.getElementById('start');
+const gameInfo = document.querySelector('.game-info');
+const textInfo = document.querySelector('.text-info');
 let orientation = 'hori';
 
 startBtn.addEventListener('click', () => {
-  const gameInfo = document.querySelector('.game-info');
-  gameInfo.textContent = "Player, place your ships";
+  textInfo.textContent = `Player, place your carrier`;
+  orientationButtons();
+})
+
+function orientationButtons() {
   const vertBtn = document.createElement("button");
   const horiBtn = document.createElement("button");
   vertBtn.textContent = 'Vertical';
@@ -16,7 +21,7 @@ startBtn.addEventListener('click', () => {
   horiBtn.addEventListener('click', () => {
     orientation = 'hori';
   });
-})
+}
 
 function showShip(array) {
   for(let i = 0; i < 10; i++) {
@@ -62,4 +67,17 @@ function createGrid() {
   createPlayerGrid();
 }
 
-export { createGrid, showShip, orientation };
+function shipPlacementOrder(string) {
+  textInfo.textContent = `Player, place your ${string}`;
+}
+
+function registerAttacks(obj) {
+  const computerCells = document.querySelectorAll('.computer-grid-cell')
+  computerCells.forEach((cell) => {
+    cell.addEventListener('click', () => {
+      obj.receiveAttack(cell.dataset.x, cell.dataset.y)
+    })
+  })
+}
+
+export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerAttacks, orientation };
