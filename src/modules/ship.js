@@ -1,15 +1,13 @@
 const ship = (length) => {
   const arr = [];
+  let sunk = false;
 
   const hit = () => arr.push('X');
 
   const isSunk = () => {
-    let sunk = arr.filter(x => x === 'X').length
-    console.log(sunk);
-    if(sunk === length) {
-      console.log("sunk");
-    } else {
-      console.log("not sunk")
+    let sunkCheck = arr.filter(x => x === 'X').length;
+    if(sunkCheck === length) {
+      sunk = true;
     }
   };
 

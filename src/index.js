@@ -63,7 +63,7 @@ gridCells.forEach((cell) => {
         if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerDestroyer) {
           shipsPlaced += 1;
           gameInfo.textContent = '';
-          registerAttacks(computerBoard);
+          registerPlayerAttacks(computerBoard);
         }
         break;
       case 5:

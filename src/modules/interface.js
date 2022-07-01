@@ -71,13 +71,14 @@ function shipPlacementOrder(string) {
   textInfo.textContent = `Player, place your ${string}`;
 }
 
-function registerAttacks(obj) {
+function registerPlayerAttacks(obj) {
   const computerCells = document.querySelectorAll('.computer-grid-cell')
   computerCells.forEach((cell) => {
     cell.addEventListener('click', () => {
+      if(cell.dataset.x, cell.dataset.y)
       obj.receiveAttack(cell.dataset.x, cell.dataset.y)
     })
   })
 }
 
-export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerAttacks, orientation };
+export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerPlayerAttacks, orientation };
