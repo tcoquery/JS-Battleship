@@ -1,6 +1,6 @@
 import { ship } from './modules/ship';
 import { gameboard } from './modules/gameboards';
-import { createGrid, showShip, shipPlacementOrder, registerAttacks } from './modules/interface';
+import { createGrid, showShip, shipPlacementOrder, registerPlayerAttacks } from './modules/interface';
 
 const board = gameboard();
 const computerBoard = gameboard();
@@ -77,3 +77,4 @@ computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 3, computerCruiser);
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 3, computerSubmarine);
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 2, computerDestroyer);
+console.log(computerBoard.grid);

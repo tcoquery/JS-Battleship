@@ -17,7 +17,7 @@ const gameboard = () => {
   const shipPresent = (element) => element != '';
 
   function placeShip(x, y, length, obj) {
-    if (orientation == 'hori') {
+    if (orientation == 'hori') {  
       let horiShipArray = [];
       for (let i = 0; i < length; i++) {
         horiShipArray.push(grid[y][x + i]);
@@ -46,7 +46,7 @@ const gameboard = () => {
 
   function placeComputerShip(x, y, length, obj) {
     const randomOrientation = Math.floor(Math.random() * 10);
-    if (randomOrientation > 4 && grid[y][x + (length - 1)] != undefined) {
+    if (randomOrientation > 4) {
       let horiShipArray = [];
       for (let i = 0; i < length; i++) {
         horiShipArray.push(grid[y][x + i]);
@@ -70,6 +70,8 @@ const gameboard = () => {
           grid[y + i][x] = obj;
         }
       }
+    } else {
+      placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), length, obj);
     }
   }
 
