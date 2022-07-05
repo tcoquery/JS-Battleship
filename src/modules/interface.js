@@ -107,4 +107,8 @@ function registerPlayerAttacks(computerObj, playerObj) {
   })
 }
 
+function shipSunk() {
+
+}
+
 export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerPlayerAttacks, orientation };

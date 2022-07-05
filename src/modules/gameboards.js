@@ -14,6 +14,8 @@ const gameboard = () => {
     ['', '', '', '', '', '', '', '', '', '']
   ];
 
+  let shipsSunk = 0;
+
   const shipPresent = (element) => element != '';
 
   function placeShip(x, y, length, obj) {
@@ -76,24 +78,21 @@ const gameboard = () => {
   }
 
   function receiveAttack(x, y) {
-    if (grid[y][x] != '') {
       grid[y][x].hit();
-      grid[y][x].isSunk();
-    } else {
-      grid[y][x] = 'O';
-    }
+      if(grid[y][x].isSunk()) {
+        shipsSunk += 1;
+      }
+      gameOver();
   }
 
-  function shipsSunk() {
-    if (grid.some(shipPresent)) {
-      return;
-    } else {
-      console.log('game over');
+  function gameOver() {
+    if(shipsSunk == 5) {
+      alert("Game over");
     }
   }
 
   return {
-    grid, placeShip, placeComputerShip, receiveAttack, shipsSunk,
+    grid, placeShip, placeComputerShip, receiveAttack
   };
 };
 
