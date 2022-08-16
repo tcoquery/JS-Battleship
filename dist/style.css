@@ -25,7 +25,11 @@
 }
 
 .player-grid-cell, .computer-grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: lightgrey ;
+
 }
 
 .grid-cell-with-ship {
