@@ -92,23 +92,19 @@ function registerPlayerAttacks(computerObj, playerObj) {
     cell.addEventListener('click', () => {
       let x = parseInt(cell.dataset.x);
       let y = parseInt(cell.dataset.y);
-      if(computerObj.grid[y][x] != '' && computerObj.grid[y][x] != 'O') {
+      console.log(computerObj)
+      if(computerObj.grid[y][x] != '' && cell.textContent != 'X') {
         computerObj.receiveAttack(x, y);
         cell.textContent = 'X';
         registerComputerAttacks(playerObj);
-      } else if(computerObj.grid[y][x] === '') {
+      } else if(computerObj.grid[y][x] === '' && cell.textContent != 'O') {
         cell.textContent = 'O';
-        computerObj.grid[y][x] = 'O'
         registerComputerAttacks(playerObj);
-      } else if(cell.textContent === 'O') {
+      } else {
         alert("This cell was already selected !");
       }
     })
   })
-}
-
-function shipSunk() {
-
 }
 
 export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerPlayerAttacks, orientation };
