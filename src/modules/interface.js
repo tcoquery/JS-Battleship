@@ -94,6 +94,7 @@ function registerPlayerAttacks(computerObj, playerObj) {
       if(computerObj.grid[y][x] != '' && cell.textContent != 'X') {
         computerObj.receiveAttack(x, y);
         cell.textContent = 'X';
+        cell.style.backgroundColor = "darkgrey";
         registerComputerAttacks(playerObj);
       } else if(computerObj.grid[y][x] === '' && cell.textContent != 'O') {
         cell.textContent = 'O';
