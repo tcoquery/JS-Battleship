@@ -1,12 +1,5 @@
-const startBtn = document.getElementById('start');
 const gameInfo = document.querySelector('.game-info');
-const textInfo = document.querySelector('.text-info');
 let orientation = 'hori';
-
-startBtn.addEventListener('click', () => {
-  textInfo.textContent = `Player, place your carrier`;
-  orientationButtons();
-})
 
 function orientationButtons() {
   const vertBtn = document.createElement("button");
