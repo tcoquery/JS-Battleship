@@ -75,13 +75,12 @@ function registerComputerAttacks(obj) {
   let x = Math.floor(Math.random() * 10)
   let y = Math.floor(Math.random() * 10)
   const cell = document.getElementById(`${y}` + `${x}`);
-  if (obj.grid[y][x] != '' && obj.grid[y][x] != 'O') {
+  if (obj.grid[y][x] != '' && cell.textContent != 'X') {
     obj.receiveAttack(x, y);
     cell.textContent = 'X'
-  } else if (obj.grid[y][x] === '') {
+  } else if (obj.grid[y][x] === '' && cell.textContent != 'O') {
     cell.textContent = 'O';
-    obj.grid[y][x] = 'O'
-  } else if(cell.textContent === 'O') {
+  } else {
     registerComputerAttacks(obj);
   }
 }
@@ -92,7 +91,6 @@ function registerPlayerAttacks(computerObj, playerObj) {
     cell.addEventListener('click', () => {
       let x = parseInt(cell.dataset.x);
       let y = parseInt(cell.dataset.y);
-      console.log(computerObj)
       if(computerObj.grid[y][x] != '' && cell.textContent != 'X') {
         computerObj.receiveAttack(x, y);
         cell.textContent = 'X';
