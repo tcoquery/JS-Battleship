@@ -29,11 +29,14 @@
   align-items: center;
   justify-content: center;
   background-color: lightgrey ;
-
 }
 
 .grid-cell-with-ship {
   background-color: darkgrey;
+}
+
+.shadow {
+  background-color: blue;
 }
 
 .title {

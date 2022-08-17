@@ -1,5 +1,6 @@
 const gameInfo = document.querySelector('.game-info');
-let orientation = 'hori';
+const textInfo = document.querySelector('.text-info');
+let orientation = 'vert';
 
 function orientationButtons() {
   const vertBtn = document.createElement("button");
@@ -21,8 +22,8 @@ function showShip(array) {
     for (let j = 0; j < 10; j++) {
       if(array[i][j] != '') {
         const cell = document.getElementById(`${i}` + `${j}`);
-        cell.classList.remove('.player-grid-cell');
         cell.classList.add('grid-cell-with-ship');
+        cell.classList.remove('shadow');
       }
     }
   }

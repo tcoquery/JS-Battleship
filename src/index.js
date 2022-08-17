@@ -1,6 +1,6 @@
 import { ship } from './modules/ship';
 import { gameboard } from './modules/gameboards';
-import { createGrid, showShip, shipPlacementOrder, registerPlayerAttacks, orientationButtons } from './modules/interface';
+import { createGrid, showShip, shipPlacementOrder, registerPlayerAttacks, orientationButtons, orientation} from './modules/interface';
 
 const startBtn = document.getElementById('start');
 const gameInfo = document.querySelector('.game-info');
@@ -17,7 +17,8 @@ const playerSubmarine = ship(3);
 const computerSubmarine = ship(3);
 const playerDestroyer = ship(2);
 const computerDestroyer = ship(2);
-let shipsPlaced = 0
+let shipsPlaced = 0;
+let shipLength = 5;
 
 createGrid();
 
@@ -25,20 +26,54 @@ const gridCells = document.querySelectorAll('.player-grid-cell');
 
 startBtn.addEventListener('click', () => {
   textInfo.textContent = `Player, place your carrier`;
+  startBtn.style.display = "none";
   orientationButtons();
+  showShipPosition();
+  hideShipPosition();
   placeShip();
 })
+
+function showShipPosition() {
+  gridCells.forEach((cell) => {
+    cell.addEventListener("mouseenter", () => {
+      if (orientation == "vert") {
+        for (let i = 0; i < (shipLength * 10); i += 10)
+          gridCells[parseInt(cell.id) + i].classList.add("shadow")
+      }
+      else {
+        for (let i = 0; i < shipLength; i++)
+          gridCells[parseInt(cell.id) + i].classList.add("shadow")
+      }
+    })
+  })
+}
+
+function hideShipPosition() {
+  gridCells.forEach((cell) => {
+    cell.addEventListener("mouseleave", () => {
+      if (orientation == "vert") {
+        for (let i = 0; i < (shipLength * 10); i += 10)
+          gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+      }
+      else {
+        for (let i = 0; i < shipLength; i++)
+          gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+        }
+      })
+    })
+  }
+
 
 function placeShip() {
   gridCells.forEach((cell) => {
     cell.addEventListener('click', () => {
-      console.log("click");
       switch(shipsPlaced) {
         case 0:
           board.placeShip(parseInt(cell.dataset.x), parseInt(cell.dataset.y), 5, playerCarrier);
           showShip(board.grid);
           if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerCarrier) {
             shipsPlaced += 1;
+            shipLength -= 1;
             shipPlacementOrder("battleship");
           }
           break;
@@ -47,6 +82,7 @@ function placeShip() {
           showShip(board.grid);
           if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerBattleship) {
             shipsPlaced += 1;
+            shipLength -= 1;
             shipPlacementOrder("cruiser");
           }
           break;
@@ -63,6 +99,7 @@ function placeShip() {
           showShip(board.grid);
           if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerSubmarine) {
             shipsPlaced += 1;
+            shipLength -= 1;
             shipPlacementOrder("destroyer");
           }
           break;
@@ -71,6 +108,7 @@ function placeShip() {
           showShip(board.grid);
           if(board.grid[parseInt(cell.dataset.y)][parseInt(cell.dataset.x)] == playerDestroyer) {
             shipsPlaced += 1;
+            shipLength = 0;
             gameInfo.textContent = '';
             registerPlayerAttacks(computerBoard, board);
           }
