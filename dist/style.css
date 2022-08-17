@@ -36,7 +36,11 @@
 }
 
 .shadow {
-  background-color: blue;
+  background-color: green;
+}
+
+.shadow-wrong {
+  background-color: red;
 }
 
 .title {

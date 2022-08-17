@@ -1,6 +1,6 @@
 import { ship } from './modules/ship';
 import { gameboard } from './modules/gameboards';
-import { createGrid, showShip, shipPlacementOrder, registerPlayerAttacks, orientationButtons, orientation} from './modules/interface';
+import { createGrid, showShip, shipPlacementOrder, registerPlayerAttacks, orientationButton, orientation} from './modules/interface';
 
 const startBtn = document.getElementById('start');
 const gameInfo = document.querySelector('.game-info');
@@ -27,7 +27,7 @@ const gridCells = document.querySelectorAll('.player-grid-cell');
 startBtn.addEventListener('click', () => {
   textInfo.textContent = `Player, place your carrier`;
   startBtn.style.display = "none";
-  orientationButtons();
+  orientationButton();
   showShipPosition();
   hideShipPosition();
   placeShip();
@@ -38,11 +38,22 @@ function showShipPosition() {
     cell.addEventListener("mouseenter", () => {
       if (orientation == "vert") {
         for (let i = 0; i < (shipLength * 10); i += 10)
-          gridCells[parseInt(cell.id) + i].classList.add("shadow")
+          if (gridCells[parseInt(cell.id) + ((shipLength - 1) * 10)] == null) {
+            gridCells[parseInt(cell.id) + i].classList.add("shadow-wrong") 
+          } else {
+            gridCells[parseInt(cell.id) + i].classList.add("shadow")
+          }
       }
       else {
-        for (let i = 0; i < shipLength; i++)
-          gridCells[parseInt(cell.id) + i].classList.add("shadow")
+        if ((parseInt(cell.dataset.x) + shipLength) > 10) {
+          for (let i = 0; i < (10 - parseInt(cell.dataset.x)); i++) {
+            gridCells[parseInt(cell.id) + i].classList.add("shadow-wrong") 
+          }
+        } else {
+          for (let i = 0; i < shipLength; i++) {
+            gridCells[parseInt(cell.id) + i].classList.add("shadow")
+          }
+        }
       }
     })
   })
@@ -53,15 +64,26 @@ function hideShipPosition() {
     cell.addEventListener("mouseleave", () => {
       if (orientation == "vert") {
         for (let i = 0; i < (shipLength * 10); i += 10)
-          gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+          if (gridCells[parseInt(cell.id) + ((shipLength - 1) * 10) ] == null) {
+            gridCells[parseInt(cell.id) + i].classList.remove("shadow-wrong") 
+          } else {
+            gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+          }
       }
       else {
-        for (let i = 0; i < shipLength; i++)
-          gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+        if ((parseInt(cell.dataset.x) + shipLength) > 10) {
+          for (let i = 0; i < (10 - parseInt(cell.dataset.x)); i++) {
+            gridCells[parseInt(cell.id) + i].classList.remove("shadow-wrong") 
+          }
+        } else {
+          for (let i = 0; i < shipLength; i++) {
+            gridCells[parseInt(cell.id) + i].classList.remove("shadow")
+          }
         }
-      })
+      }
     })
-  }
+  })
+}
 
 
 function placeShip() {

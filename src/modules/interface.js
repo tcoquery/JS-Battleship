@@ -2,7 +2,7 @@ const gameInfo = document.querySelector('.game-info');
 const textInfo = document.querySelector('.text-info');
 let orientation = 'hori';
 
-function orientationButtons() {
+function orientationButton() {
   const oriBtn = document.createElement("button");
   oriBtn.textContent = 'Change orientation';
   gameInfo.appendChild(oriBtn);
@@ -98,4 +98,4 @@ function registerPlayerAttacks(computerObj, playerObj) {
   })
 }
 
-export { createGrid, showShip, orientationButtons, shipPlacementOrder, registerPlayerAttacks, orientation };
+export { createGrid, showShip, orientationButton, shipPlacementOrder, registerPlayerAttacks, orientation };
