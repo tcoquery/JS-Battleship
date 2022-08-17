@@ -1,19 +1,17 @@
 const gameInfo = document.querySelector('.game-info');
 const textInfo = document.querySelector('.text-info');
-let orientation = 'vert';
+let orientation = 'hori';
 
 function orientationButtons() {
-  const vertBtn = document.createElement("button");
-  const horiBtn = document.createElement("button");
-  vertBtn.textContent = 'Vertical';
-  horiBtn.textContent = 'Horizontal';
-  gameInfo.appendChild(vertBtn);
-  gameInfo.appendChild(horiBtn);
-  vertBtn.addEventListener('click', () => {
-    orientation = 'vert';
-  });
-  horiBtn.addEventListener('click', () => {
-    orientation = 'hori';
+  const oriBtn = document.createElement("button");
+  oriBtn.textContent = 'Change orientation';
+  gameInfo.appendChild(oriBtn);
+  oriBtn.addEventListener('click', () => {
+    if(orientation == 'vert') {
+      orientation = "hori";
+    } else {
+      orientation = 'vert';
+    }
   });
 }
 
