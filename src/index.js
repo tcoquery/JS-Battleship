@@ -7,16 +7,16 @@ const gameInfo = document.querySelector('.game-info');
 const textInfo = document.querySelector('.text-info');
 const board = gameboard();
 const computerBoard = gameboard();
-const playerCarrier = ship(5);
-const computerCarrier = ship(5);
-const playerBattleship = ship(4);
-const computerBattleship = ship(4);
-const playerCruiser = ship(3);
-const computerCruiser = ship(3);
-const playerSubmarine = ship(3);
-const computerSubmarine = ship(3);
-const playerDestroyer = ship(2);
-const computerDestroyer = ship(2);
+const playerCarrier = ship(5, "carrier");
+const computerCarrier = ship(5, "computer-carrier");
+const playerBattleship = ship(4, "battleship");
+const computerBattleship = ship(4, "computer-battleship");
+const playerCruiser = ship(3, "cruiser");
+const computerCruiser = ship(3, "computer-cruiser");
+const playerSubmarine = ship(3, "submarine");
+const computerSubmarine = ship(3, "computer-submarine");
+const playerDestroyer = ship(2, "destroyer");
+const computerDestroyer = ship(2, "computer-destroyer");
 let shipsPlaced = 0;
 let shipLength = 5;
 
@@ -25,7 +25,7 @@ createGrid();
 const gridCells = document.querySelectorAll('.player-grid-cell');
 
 startBtn.addEventListener('click', () => {
-  textInfo.textContent = `Player, place your carrier`;
+  textInfo.textContent = `Player, place your carrier.`;
   startBtn.style.display = "none";
   orientationButton();
   showShipPosition();

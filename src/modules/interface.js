@@ -1,5 +1,6 @@
 const gameInfo = document.querySelector('.game-info');
 const textInfo = document.querySelector('.text-info');
+
 let orientation = 'hori';
 
 function orientationButton() {
@@ -60,18 +61,24 @@ function createGrid() {
 }
 
 function shipPlacementOrder(string) {
-  textInfo.textContent = `Player, place your ${string}`;
+  textInfo.textContent = `Player, place your ${string}.`;
 }
 
 function registerComputerAttacks(obj) {
   let x = Math.floor(Math.random() * 10)
   let y = Math.floor(Math.random() * 10)
   const cell = document.getElementById(`${y}` + `${x}`);
-  if (obj.grid[y][x] != '' && cell.textContent != 'X') {
+  if (obj.grid[y][x] != "" && cell.style.backgroundColor != "#ff4f56") {
     obj.receiveAttack(x, y);
-    cell.textContent = 'X'
-  } else if (obj.grid[y][x] === '' && cell.textContent != 'O') {
-    cell.textContent = 'O';
+    const hitIcon = document.createElement("i");
+    hitIcon.className = "fa-solid fa-crosshairs";
+    cell.appendChild(hitIcon);
+    cell.style.backgroundColor = "#ff4f56";
+  } else if (obj.grid[y][x] === '') {
+    const missIcon = document.createElement("i");
+    missIcon.className = "fa-solid fa-water";
+    cell.appendChild(missIcon);
+    obj.grid[y][x] = 'O';
   } else {
     registerComputerAttacks(obj);
   }
@@ -83,14 +90,19 @@ function registerPlayerAttacks(computerObj, playerObj) {
     cell.addEventListener('click', () => {
       let x = parseInt(cell.dataset.x);
       let y = parseInt(cell.dataset.y);
-      if(computerObj.grid[y][x] != '' && cell.textContent != 'X') {
+      if(computerObj.grid[y][x] != "" && cell.style.backgroundColor != "#ff4f56") {
+        const hitIcon = document.createElement("i");
+        hitIcon.className = "fa-solid fa-crosshairs";
+        cell.appendChild(hitIcon);
+        cell.style.backgroundColor = "#ff4f56";
         computerObj.receiveAttack(x, y);
-        cell.textContent = 'X';
-        cell.style.backgroundColor = "darkgrey";
         registerComputerAttacks(playerObj);
-      } else if(computerObj.grid[y][x] === '' && cell.textContent != 'O') {
-        cell.textContent = 'O';
-        registerComputerAttacks(playerObj);
+      } else if(computerObj.grid[y][x] === '') {
+        const missIcon = document.createElement("i");
+        missIcon.className = "fa-solid fa-water";
+        cell.appendChild(missIcon);
+        computerObj.grid[y][x] = 'O';
+        registerComputerAttacks(playerObj);   
       } else {
         alert("This cell was already selected !");
       }

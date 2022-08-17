@@ -1,5 +1,7 @@
-const ship = (length) => {
+const ship = (length, shipName) => {
   const arr = [];
+
+  const name = shipName;
 
   const hit = () => arr.push('X');
 
@@ -11,7 +13,7 @@ const ship = (length) => {
   };
 
   return {
-    isSunk, hit,
+    isSunk, hit, name
   };
 };
 
