@@ -66,42 +66,44 @@ function shipPlacementOrder(string) {
   textInfo.textContent = `Player, place your ${string}.`;
 }
 
-function registerComputerAttacks(obj) {
-  let x = Math.floor(Math.random() * 10)
-  let y = Math.floor(Math.random() * 10)
+function registerComputerAttacks() {
+  let x = Math.floor(Math.random() * 10);
+  let y = Math.floor(Math.random() * 10);
   const cell = document.getElementById(`${y}` + `${x}`);
-  if (obj.grid[y][x] != "" && cell.style.backgroundColor != "#ff4f56") {
-    obj.receiveAttack(x, y);
+  if (board.grid[y][x] != "" && cell.dataset.hit != "hit") {
     const hitIcon = document.createElement("i");
     hitIcon.className = "fa-solid fa-crosshairs";
     cell.appendChild(hitIcon);
     cell.style.backgroundColor = "#ff4f56";
-  } else if (obj.grid[y][x] === '') {
+    cell.dataset.hit = "hit"
+    board.receiveAttack(x, y);
+  } else if (board.grid[y][x] === '' && cell.dataset.hit != "hit") {
     const missIcon = document.createElement("i");
     missIcon.className = "fa-solid fa-water";
     cell.appendChild(missIcon);
-    obj.grid[y][x] = 'O';
+    cell.dataset.hit = "hit"
   } else {
-    registerComputerAttacks(obj);
+    registerComputerAttacks(board);
   }
 }
 
 function registerPlayerAttacks(event) {
   const x = parseInt(event.target.dataset.x);
   const y = parseInt(event.target.dataset.y);
-  if (computerBoard.grid[y][x] != "" && event.target.style.backgroundColor != "#ff4f56") {
+  if (computerBoard.grid[y][x] != "" && event.target.dataset.hit != "hit") {
     const hitIcon = document.createElement("i");
     hitIcon.className = "fa-solid fa-crosshairs";
     event.target.appendChild(hitIcon);
     event.target.style.backgroundColor = "#ff4f56";
+    event.target.dataset.hit = "hit"
     computerBoard.receiveAttack(x, y);
-    registerComputerAttacks(board);
-  } else if(computerBoard.grid[y][x] === '') {
+    registerComputerAttacks();
+  } else if(computerBoard.grid[y][x] === "" && event.target.dataset.hit != "hit") {
     const missIcon = document.createElement("i");
     missIcon.className = "fa-solid fa-water";
     event.target.appendChild(missIcon);
-    computerBoard.grid[y][x] = 'O';
-    registerComputerAttacks(board);   
+    event.target.dataset.hit = "hit";
+    registerComputerAttacks();   
   } else {
     alert("This cell was already selected !");
   }

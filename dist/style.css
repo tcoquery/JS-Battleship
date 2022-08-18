@@ -58,6 +58,10 @@ body {
   cursor: pointer;
 }
 
+.fa-solid {
+  pointer-events: none;
+}
+
 .grid-cell-with-ship {
   background-color: #00658c;
 }
