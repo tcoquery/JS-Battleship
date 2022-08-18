@@ -79,7 +79,6 @@ const gameboard = () => {
 
   function receiveAttack(x, y) {
       grid[y][x].hit();
-      console.log(grid[y][x])
       if(grid[y][x].isSunk()) {
         shipsSunk += 1;
         const ship = document.getElementById(grid[y][x].name);
