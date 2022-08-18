@@ -23,6 +23,7 @@ let shipLength = 5;
 createGrid();
 
 const gridCells = document.querySelectorAll('.player-grid-cell');
+const computerCells = document.querySelectorAll('.computer-grid-cell')
 
 startBtn.addEventListener('click', () => {
   textInfo.textContent = `Player, place your carrier.`;
@@ -81,53 +82,59 @@ function hideShipPosition(event) {
 function placeShip(event) {
   switch(shipsPlaced) {
     case 0:
-      board.placeShip(parseInt(event.target.x), parseInt(event.target.y), 5, playerCarrier);
+      board.placeShip(parseInt(event.target.dataset.x), parseInt(event.target.dataset.y), 5, playerCarrier);
       showShip(board.grid);
-      if(board.grid[parseInt(event.target.y)][parseInt(event.target.x)] == playerCarrier) {
+      if(board.grid[parseInt(event.target.dataset.y)][parseInt(event.target.dataset.x)] == playerCarrier) {
         shipsPlaced += 1;
         shipLength -= 1;
         shipPlacementOrder("battleship");
       }
       break;
     case 1:
-      board.placeShip(parseInt(event.target.x), parseInt(event.target.y), 4, playerBattleship);
+      board.placeShip(parseInt(event.target.dataset.x), parseInt(event.target.dataset.y), 4, playerBattleship);
       showShip(board.grid);
-      if(board.grid[parseInt(event.target.y)][parseInt(event.target.x)] == playerBattleship) {
+      if(board.grid[parseInt(event.target.dataset.y)][parseInt(event.target.dataset.x)] == playerBattleship) {
         shipsPlaced += 1;
         shipLength -= 1;
         shipPlacementOrder("cruiser");
       }
       break;
     case 2:        
-      board.placeShip(parseInt(event.target.x), parseInt(event.target.y), 3, playerCruiser);
+      board.placeShip(parseInt(event.target.dataset.x), parseInt(event.target.dataset.y), 3, playerCruiser);
       showShip(board.grid);
-      if(board.grid[parseInt(event.target.y)][parseInt(event.target.x)] == playerCruiser) {
+      if(board.grid[parseInt(event.target.dataset.y)][parseInt(event.target.dataset.x)] == playerCruiser) {
         shipsPlaced += 1;
         shipPlacementOrder("submarine");
       }
       break;
     case 3:
-      board.placeShip(parseInt(event.target.x), parseInt(event.target.y), 3, playerSubmarine);
+      board.placeShip(parseInt(event.target.dataset.x), parseInt(event.target.dataset.y), 3, playerSubmarine);
       showShip(board.grid);
-      if(board.grid[parseInt(event.target.y)][parseInt(event.target.x)] == playerSubmarine) {
+      if(board.grid[parseInt(event.target.dataset.y)][parseInt(event.target.dataset.x)] == playerSubmarine) {
         shipsPlaced += 1;
         shipLength -= 1;
         shipPlacementOrder("destroyer");
       }
       break;
     case 4:
-      board.placeShip(parseInt(event.target.x), parseInt(event.target.y), 2, playerDestroyer);
+      board.placeShip(parseInt(event.target.dataset.x), parseInt(event.target.dataset.y), 2, playerDestroyer);
       showShip(board.grid);
-      if(board.grid[parseInt(event.target.y)][parseInt(event.target.x)] == playerDestroyer) {
+      if(board.grid[parseInt(event.target.dataset.y)][parseInt(event.target.dataset.x)] == playerDestroyer) {
         shipsPlaced += 1;
-        shipLength = 0;
+        gridCells.forEach((cell) => {cell.removeEventListener("mouseenter", showShipPosition)})
+        gridCells.forEach((cell) => {cell.removeEventListener("mouseleave", hideShipPosition)})
+        gridCells.forEach((cell) => {cell.removeEventListener('click', placeShip)})
         gameInfo.textContent = '';
-        registerPlayerAttacks(computerBoard, board);
+        addEvents();
       }
       break;
     case 5:
       return;
   }
+}
+
+function addEvents() {
+  computerCells.forEach((cell) => {cell.addEventListener('click', registerPlayerAttacks)})
 }
 
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 5, computerCarrier);
@@ -136,3 +143,4 @@ computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 3, computerSubmarine);
 computerBoard.placeComputerShip(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), 2, computerDestroyer);
 
+export { computerBoard, board}

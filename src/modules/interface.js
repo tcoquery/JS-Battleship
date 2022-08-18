@@ -1,3 +1,5 @@
+import {computerBoard, board} from "../index.js"
+
 const gameInfo = document.querySelector('.game-info');
 const textInfo = document.querySelector('.text-info');
 
@@ -84,30 +86,25 @@ function registerComputerAttacks(obj) {
   }
 }
 
-function registerPlayerAttacks(computerObj, playerObj) {
-  const computerCells = document.querySelectorAll('.computer-grid-cell')
-  computerCells.forEach((cell) => {
-    cell.addEventListener('click', () => {
-      let x = parseInt(cell.dataset.x);
-      let y = parseInt(cell.dataset.y);
-      if(computerObj.grid[y][x] != "" && cell.style.backgroundColor != "#ff4f56") {
-        const hitIcon = document.createElement("i");
-        hitIcon.className = "fa-solid fa-crosshairs";
-        cell.appendChild(hitIcon);
-        cell.style.backgroundColor = "#ff4f56";
-        computerObj.receiveAttack(x, y);
-        registerComputerAttacks(playerObj);
-      } else if(computerObj.grid[y][x] === '') {
-        const missIcon = document.createElement("i");
-        missIcon.className = "fa-solid fa-water";
-        cell.appendChild(missIcon);
-        computerObj.grid[y][x] = 'O';
-        registerComputerAttacks(playerObj);   
-      } else {
-        alert("This cell was already selected !");
-      }
-    })
-  })
+function registerPlayerAttacks(event) {
+  const x = parseInt(event.target.dataset.x);
+  const y = parseInt(event.target.dataset.y);
+  if (computerBoard.grid[y][x] != "" && event.target.style.backgroundColor != "#ff4f56") {
+    const hitIcon = document.createElement("i");
+    hitIcon.className = "fa-solid fa-crosshairs";
+    event.target.appendChild(hitIcon);
+    event.target.style.backgroundColor = "#ff4f56";
+    computerBoard.receiveAttack(x, y);
+    registerComputerAttacks(board);
+  } else if(computerBoard.grid[y][x] === '') {
+    const missIcon = document.createElement("i");
+    missIcon.className = "fa-solid fa-water";
+    event.target.appendChild(missIcon);
+    computerBoard.grid[y][x] = 'O';
+    registerComputerAttacks(board);   
+  } else {
+    alert("This cell was already selected !");
+  }
 }
 
 export { createGrid, showShip, orientationButton, shipPlacementOrder, registerPlayerAttacks, orientation };

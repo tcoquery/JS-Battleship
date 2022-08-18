@@ -1,4 +1,4 @@
-import { orientation } from './interface';
+import { orientation, registerPlayerAttacks } from './interface';
 
 const gameboard = () => {
   const grid = [
@@ -91,6 +91,8 @@ const gameboard = () => {
   function gameOver() {
     if(shipsSunk == 5) {
       alert("Game over");
+      const computerCells = document.querySelectorAll('.computer-grid-cell')
+      computerCells.forEach((cell) => {cell.removeEventListener('click', registerPlayerAttacks)})
     }
   }
 
