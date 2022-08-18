@@ -24,6 +24,7 @@ function showShip(array) {
       if(array[i][j] != '') {
         const cell = document.getElementById(`${i}` + `${j}`);
         cell.classList.add('grid-cell-with-ship');
+        cell.dataset.ship = true;
         cell.classList.remove('shadow');
       }
     }

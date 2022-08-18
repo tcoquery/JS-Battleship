@@ -30,14 +30,16 @@ startBtn.addEventListener('click', () => {
   startBtn.style.display = "none";
   orientationButton();
   gridCells.forEach((cell) => {cell.addEventListener("mouseenter", showShipPosition)})
+  gridCells.forEach((cell) => {cell.addEventListener("mouseenter", showHorizontalShips)})
   gridCells.forEach((cell) => {cell.addEventListener("mouseleave", hideShipPosition)})
+  gridCells.forEach((cell) => {cell.addEventListener("mouseleave", hideHorizontalShips)})
   gridCells.forEach((cell) => {cell.addEventListener('click', placeShip)})
 })
 
 function showShipPosition(event) {
   if (orientation == "vert") {
     for (let i = 0; i < (shipLength * 10); i += 10)
-      if (gridCells[parseInt(event.target.id) + ((shipLength - 1) * 10)] == null) {
+      if (gridCells[parseInt(event.target.id) + ((shipLength - 1) * 10)] == null || gridCells[parseInt(event.target.id)+i].dataset.ship) {
         gridCells[parseInt(event.target.id) + i].classList.add("shadow-wrong") 
       } else {
         gridCells[parseInt(event.target.id) + i].classList.add("shadow")
@@ -59,7 +61,7 @@ function showShipPosition(event) {
 function hideShipPosition(event) {
   if (orientation == "vert") {
     for (let i = 0; i < (shipLength * 10); i += 10)
-      if (gridCells[parseInt(event.target.id) + ((shipLength - 1) * 10) ] == null ) {
+      if (gridCells[parseInt(event.target.id) + ((shipLength - 1) * 10) ] == null || gridCells[parseInt(event.target.id)+i].dataset.ship) {
         gridCells[parseInt(event.target.id) + i].classList.remove("shadow-wrong") 
       } else {
         gridCells[parseInt(event.target.id) + i].classList.remove("shadow")
@@ -78,7 +80,22 @@ function hideShipPosition(event) {
   }
 }
 
+function showHorizontalShips(event) {
+  for (let i = 0; i < shipLength; i++) {
+    if(gridCells[parseInt(event.target.id) + i].dataset.ship) {
+      gridCells[parseInt(event.target.id) + i].classList.add("shadow-wrong") 
+    }
+  }
+} 
 
+function hideHorizontalShips(event) {
+  for (let i = 0; i < shipLength; i++) {
+    if(gridCells[parseInt(event.target.id)+i].dataset.ship) {
+      gridCells[parseInt(event.target.id) + i].classList.remove("shadow-wrong") 
+    }
+  }
+} 
+ 
 function placeShip(event) {
   switch(shipsPlaced) {
     case 0:
