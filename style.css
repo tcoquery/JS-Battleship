@@ -1,0 +1,134 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  margin : 0;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grids {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  gap: 5px;
+  max-width: 1000px;
+}
+
+.game-interface {
+  display: flex;
+  justify-content: center;
+}
+
+.game-info {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-info {
+  margin-bottom: 20px;
+}
+
+.player-interface, .computer-interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.player-grid-cell, .computer-grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:  #6db3de;
+}
+
+.computer-grid-cell {
+  cursor: pointer;
+}
+
+.fa-solid {
+  pointer-events: none;
+}
+
+.grid-cell-with-ship {
+  background-color: #00658c;
+}
+
+.shadow {
+  background-color: #00af63;
+}
+
+.shadow-wrong {
+  background-color: #ff4f56;
+}
+
+/* CSS */
+button {
+  align-items: center;
+  background-color: #ffc1b6;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+button:hover:after {
+  transform: translate(0, 0);
+}
+
+button:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+button:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  button {
+    padding: 0 40px;
+  }
+}
